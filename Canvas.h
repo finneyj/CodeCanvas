@@ -8,6 +8,11 @@ class Canvas {
     public:
         // Create a representation of a canvas of the given size. 
         Canvas(int width, int height);
+
+        // width and height accessors
+
+        int getWidth();
+        int getHeight();
         
         // Add a circle to this canvas
         void addCircle(Circle& circle);
