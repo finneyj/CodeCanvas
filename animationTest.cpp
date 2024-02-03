@@ -2,6 +2,7 @@
 #include "Circle.h"
 #include <thread>
 #include <chrono>
+#include <unistd.h>
 
 int main() {
     Canvas canvas(800, 600);
@@ -32,7 +33,7 @@ int main() {
             initialY += 2 * moveStepY;
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+        usleep(20000);
     }
 
     return 0;
