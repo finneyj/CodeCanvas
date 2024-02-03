@@ -35,3 +35,12 @@ void Canvas::update() {
     
     circles.clear();
 }
+
+int Canvas::getWidth() {
+    return canvasWidth;
+}
+
+int Canvas::getHeight() {
+    return canvasHeight;
+}
+
