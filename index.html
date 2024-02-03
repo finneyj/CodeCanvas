@@ -12,9 +12,12 @@
 </head>
 <body>
 <canvas id="circleCanvas" width="800" height="800"></canvas>
-<button onclick="updateJSON()">Update/Replay</button> 
+<button onclick="startUpdating()">Start</button>
+<button onclick="stopUpdating()">Stop</button>
+<button onclick="updateJSON()">Manual Update</button>
 <script>
     let circlesData = [];
+    let updateInterval;
     const sampleJsonData = [{ "x": 400, "y": 400, "radius": 40, "color": "purple"}, 
     { "x": 500, "y": 500, "radius": 25, "color": "orange"}];
 
@@ -74,6 +77,13 @@
                 drawCircles(circlesData);
             })
             .catch(error => console.error('Error fetching JSON:', error));
+    }
+    function startUpdating() {
+        updateJSON();
+        updateInterval = setInterval(updateJSON, 20); // Set interval for updates every 20 ms
+    }
+   function stopUpdating() {
+        clearInterval(updateInterval);
     }
     //updateJSON();
     drawCircles(sampleJsonData);
