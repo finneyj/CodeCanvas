@@ -34,6 +34,9 @@ class Circle {
         // Returns the current radius of this circle.
         void setRadius(int radius);
 
+        // Move the position of this circle relative to it current position
+        void move(int dx, int dy);
+
     private:
         int x;
         int y;

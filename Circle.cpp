@@ -48,3 +48,11 @@ void Circle::setY(int yPosition){
 void Circle::setRadius(int size){
     radius = size;
 }
+
+// Move the position of this circle relative to it current position
+void Circle::move(int dx, int dy)
+{
+    x = x + dx;
+    y = y + dy;
+}
+
