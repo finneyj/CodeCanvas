@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Display</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas id="circleCanvas" width="800" height="800"></canvas>
+<button onclick="updateJSON()">Update/Replay</button> 
+<script>
+    let circlesData = [];
+    const sampleJsonData = [{ "x": 400, "y": 400, "radius": 40, "color": "purple"}, 
+    { "x": 500, "y": 500, "radius": 25, "color": "orange"}];
+
+    const hackerJsonData = [{ "x": 400, "y": 400, "radius": 40, "color": "purple", "destinationX": 600, "destinationY": 400, "speed": 2 }, 
+        { "x": 500, "y": 500, "radius": 25, "color": "orange", "destinationX": 400, "destinationY": 600, "speed": 1 }];
+    
+    function drawCircles(circles) {
+        const canvas = document.getElementById('circleCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        circles.forEach(circle => {
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+            ctx.fillStyle = circle.color;
+            ctx.fill();
+            ctx.stroke();
+
+            if (circle.destinationX !== undefined && circle.destinationY !== undefined && circle.speed !== undefined) {
+                if (circle.x !== circle.destinationX || circle.y !== circle.destinationY) {
+                    const deltaX = circle.destinationX - circle.x;
+                    const deltaY = circle.destinationY - circle.y;
+                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                    if (distance > circle.speed) {
+                        const ratio = circle.speed / distance;
+                        circle.x += deltaX * ratio;
+                        circle.y += deltaY * ratio;
+                    } else {
+                        circle.x = circle.destinationX;
+                        circle.y = circle.destinationY;
+                    }
+                }
+            }
+        });
+        requestAnimationFrame(() => drawCircles(circles));
+    }
+
+
+   function handleFileInput(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                circlesData = JSON.parse(e.target.result);
+                drawCircles(circlesData);
+            };
+            reader.readAsText(file);
+        }
+    }
+
+    function updateJSON() {
+        const url = `http://localhost:8000/circles.json?timestamp=${new Date().getTime()}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                circlesData = data;
+                drawCircles(circlesData);
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+    }
+    //updateJSON();
+    drawCircles(sampleJsonData);
+</script>
+</body>
+</html>
