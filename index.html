@@ -69,8 +69,8 @@
     }
 
     function updateJSON() {
-        const url = `http://localhost:8000/circles.json?timestamp=${new Date().getTime()}`;
-        fetch(url)
+        const url = await `http://localhost:8000/circles.json?timestamp=${new Date().getTime()}`;
+        await fetch(url)
             .then(response => response.json())
             .then(data => {
                 circlesData = data;
