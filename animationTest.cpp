@@ -9,12 +9,12 @@ int main() {
     int initialX = 100;
     int initialY = 100;
 
-    int moveStepX = 5;
-    int moveStepY = 3;
+    int moveStepX = 50;
+    int moveStepY = 30;
 
     int radius = 30;
 
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 1000; ++i) {
 
         Circle circle1(initialX, initialY, radius, "red");
         canvas.addCircle(circle1);
@@ -24,13 +24,15 @@ int main() {
         initialY += moveStepY;
         if (initialX < 0 || initialX > canvas.getWidth() - radius) {
             moveStepX = -moveStepX;
+            initialX += 2 * moveStepX;
         }
 
         if (initialY < 0 || initialY > canvas.getHeight() - radius) {
             moveStepY = -moveStepY;
+            initialY += 2 * moveStepY;
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
 
     return 0;
