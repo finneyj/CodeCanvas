@@ -24,10 +24,12 @@ int main() {
         initialY += moveStepY;
         if (initialX < 0 || initialX > canvas.getWidth() - radius) {
             moveStepX = -moveStepX;
+            initialX += 2 * moveStepX;
         }
 
         if (initialY < 0 || initialY > canvas.getHeight() - radius) {
             moveStepY = -moveStepY;
+            initialY += 2 * moveStepY;
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
