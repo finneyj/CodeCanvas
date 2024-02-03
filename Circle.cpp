@@ -1,20 +1,30 @@
 #include "Circle.h"
 
-Circle::Circle(int x, int y, int radius, std::string color)
-    : x(x), y(y), radius(radius), color(color) {}
+// Constructor: Creates a new Circle, with the given geometry.
+Circle::Circle(int xPosition, int yPosition, int size, std::string col)
+{
+    x = xPosition;
+    y = yPosition;
+    radius = size;
+    colour = col;
+}
 
+// Returns the current X coordinate of this circle.
 int Circle::getX(){
     return x;
 }
 
+// Returns the current Y coordinate of this circle.
 int Circle::getY(){
     return y;
 }          
 
+// Returns the current radius of this circle.
 int Circle::getRadius(){
     return radius;
 }
 
-std::string Circle::getColor(){
-    return color;
+// Returns the current color of this circle.
+std::string Circle::getColour(){
+    return colour;
 }
