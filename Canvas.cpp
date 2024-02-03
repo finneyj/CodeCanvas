@@ -1,4 +1,5 @@
 #include "Canvas.h"
+#include <unistd.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -11,7 +12,7 @@ Canvas::Canvas(int width, int height){
 
 // Add a circle to this canvas
 void Canvas::addCircle(Circle& circle) {
-    circles.push_back(circle);
+    circles.push_back(&circle);
 }
 
 // Update the JSON file with all the graphical objects on this canvas
@@ -21,8 +22,8 @@ void Canvas::update() {
     if (outFile.is_open()) {
     
         outFile << "[";
-        for (Circle circle : circles) {
-            outFile << "{ \"x\": " << circle.getX() << ", \"y\": " << circle.getY() << ", \"radius\": " << circle.getRadius() << ", \"color\": \"" << circle.getColour() << "\" },";
+        for (Circle *circle : circles) {
+            outFile << "{ \"x\": " << circle->getX() << ", \"y\": " << circle->getY() << ", \"radius\": " << circle->getRadius() << ", \"color\": \"" << circle->getColour() << "\" },";
         }
         if (!circles.empty()) {
             outFile.seekp(-1, std::ios_base::end); // Remove the last comma
@@ -32,7 +33,11 @@ void Canvas::update() {
     } else {
         std::cerr << "Error opening circles.json file" << std::endl;
     }
-    
+}
+
+// Clear the canvas of any added circles
+void Canvas::clear()
+{
     circles.clear();
 }
 
@@ -42,5 +47,11 @@ int Canvas::getWidth() {
 
 int Canvas::getHeight() {
     return canvasHeight;
+}
+
+// Pause for one frame (approx 1/50th of a second)
+void  Canvas::pause()
+{
+    usleep(20000);
 }
 

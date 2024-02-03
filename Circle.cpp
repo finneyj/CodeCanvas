@@ -28,3 +28,23 @@ int Circle::getRadius(){
 std::string Circle::getColour(){
     return colour;
 }
+
+// Returns the current colour of this circle.
+void Circle::setColour(std::string col){
+    colour = col;
+}
+
+// Returns the current X coordinate of this circle.
+void Circle::setX(int xPosition){
+    x = xPosition;
+}
+
+// Returns the current Y coordinate of this circle.
+void Circle::setY(int yPosition){
+    y = yPosition;
+}
+
+// Returns the current radius of this circle.
+void Circle::setRadius(int size){
+    radius = size;
+}

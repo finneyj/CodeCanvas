@@ -21,7 +21,19 @@ class Circle {
 
         // Returns the current colour of this circle.
         std::string getColour();
-      
+
+        // Returns the current colour of this circle.
+        void setColour(std::string);
+
+        // Returns the current X coordinate of this circle.
+        void setX(int x);
+
+        // Returns the current Y coordinate of this circle.
+        void setY(int y);
+
+        // Returns the current radius of this circle.
+        void setRadius(int radius);
+
     private:
         int x;
         int y;
