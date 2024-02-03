@@ -9,12 +9,12 @@ int main() {
     int initialX = 100;
     int initialY = 100;
 
-    int moveStepX = 5;
-    int moveStepY = 3;
+    int moveStepX = 50;
+    int moveStepY = 30;
 
     int radius = 30;
 
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 1000; ++i) {
 
         Circle circle1(initialX, initialY, radius, "red");
         canvas.addCircle(circle1);
