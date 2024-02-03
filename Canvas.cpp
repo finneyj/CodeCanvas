@@ -3,8 +3,10 @@
 #include <fstream>
 #include <sstream>
 
-
-Canvas::Canvas(int width, int height) : canvasWidth(width), canvasHeight(height) {}
+Canvas::Canvas(int width, int height){
+    canvasHeight = width;
+    canvasHeight = height;
+}
 
 void Canvas::addCircle(Circle& circle) {
     circles.push_back(circle);

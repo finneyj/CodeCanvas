@@ -9,6 +9,7 @@ class Canvas {
         Canvas(int width, int height);
         void addCircle(Circle& circle);
         void update();
+        
     private:
         int canvasWidth;
         int canvasHeight;
