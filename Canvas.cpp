@@ -23,7 +23,7 @@ void Canvas::update() {
     
         outFile << "[";
         for (Circle *circle : circles) {
-            outFile << "{ \"x\": " << circle->getX() << ", \"y\": " << circle->getY() << ", \"radius\": " << circle->getRadius() << ", \"color\": \"" << circle->getColour() << "\" },";
+            outFile << "{ \"shape\": \"circle\", \"parameters\": { \"x\": "<< circle->getX() << ", \"y\": " << circle->getY() << ", \"radius\": " << circle->getRadius() << ", \"color\": \"" << circle->getColour() << "\" } },";
         }
         if (!circles.empty()) {
             outFile.seekp(-1, std::ios_base::end); // Remove the last comma
